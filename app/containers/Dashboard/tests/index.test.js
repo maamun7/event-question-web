@@ -1,20 +1,20 @@
 /**
- * Test the HomePage
+ * Test the Home
  */
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import ReposList from 'components/ReposList';
-import HomePage from '../HomePage';
+import Home from '../Home';
 import { mapDispatchToProps } from '../index';
 import { changeUsername } from '../actions';
 import { loadRepos } from '../../App/actions';
 
-describe('<HomePage />', () => {
+describe('<Home />', () => {
   it('should render the repos list', () => {
     const renderedComponent = shallow(
-      <HomePage loading error={false} repos={[]} />
+      <Home loading error={false} repos={[]} />
     );
     expect(
       renderedComponent.contains(<ReposList loading error={false} repos={[]} />)
@@ -24,7 +24,7 @@ describe('<HomePage />', () => {
   it('should render fetch the repos on mount if a username exists', () => {
     const submitSpy = jest.fn();
     mount(
-      <HomePage
+      <Home
         username="Not Empty"
         onChangeUsername={() => {}}
         onSubmitForm={submitSpy}
@@ -35,14 +35,14 @@ describe('<HomePage />', () => {
 
   it('should not call onSubmitForm if username is an empty string', () => {
     const submitSpy = jest.fn();
-    mount(<HomePage onChangeUsername={() => {}} onSubmitForm={submitSpy} />);
+    mount(<Home onChangeUsername={() => {}} onSubmitForm={submitSpy} />);
     expect(submitSpy).not.toHaveBeenCalled();
   });
 
   it('should not call onSubmitForm if username is null', () => {
     const submitSpy = jest.fn();
     mount(
-      <HomePage
+      <Home
         username=""
         onChangeUsername={() => {}}
         onSubmitForm={submitSpy}

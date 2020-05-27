@@ -1,7 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
 import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 import Home from 'containers/Home/Loadable';
@@ -9,8 +8,9 @@ import Login from 'containers/Login/Loadable';
 import Dashboard from 'containers/Dashboard/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import LoadingIndicator from '../../components/LoadingIndicator'
-import ReactNotification from 'react-notifications-component'
+import LoadingIndicator from '../../components/LoadingIndicator';
+import NotFound from '../NotFound/Loadable';
+import ReactNotification from 'react-notifications-component';
 import './style.scss';
 
 const App = () => (
@@ -30,7 +30,7 @@ const App = () => (
 				<PublicRoute component={Login} restricted={true} path="/login" exact />
 				<PrivateRoute component={Dashboard} path="/dashboard" exact />
 				<PrivateRoute component={Dashboard} path="/event" exact />
-				<Route path="" component={NotFoundPage} />
+				<Route path="" component={NotFound} />
 			</Switch>
 		</BrowserRouter>
 		<Footer />
