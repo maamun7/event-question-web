@@ -25,11 +25,7 @@ const App = () => (
 		<Header />
 		<ReactNotification />
 		<BrowserRouter>
-			<Switch>
-				{/* <Route exact path="/" component={HomePage} />
-				<Route path="/login" component={LoginPage} />
-				<Route path="" component={NotFoundPage} /> */}
-				
+			<Switch>				
 				<PublicRoute component={Home} restricted={false}  path="/" exact />
 				<PublicRoute component={Login} restricted={true} path="/login" exact />
 				<PrivateRoute component={Dashboard} path="/dashboard" exact />
