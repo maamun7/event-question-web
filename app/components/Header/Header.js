@@ -36,7 +36,7 @@ const Header = () => {
 								<a className="nav-link wrapnav" href="/login">Log In</a>
 							</li>
 							<li className="nav-item ml-3">
-								<a className="nav-link wrapnav -blue" href="#">
+								<a className="nav-link wrapnav -blue" href="/SignUp">
 									<span className="button button--small button--orange">Sign Up</span>
 								</a>
 							</li>

@@ -6,6 +6,7 @@ import PublicRoute from 'components/PublicRoute';
 import Home from 'containers/Home/Loadable';
 import Login from 'containers/Login/Loadable';
 import Dashboard from 'containers/Dashboard/Loadable';
+import SignUp from 'containers/SignUp/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import LoadingIndicator from '../../components/LoadingIndicator';
@@ -27,9 +28,10 @@ const App = () => (
 		<BrowserRouter>
 			<Switch>				
 				<PublicRoute component={Home} restricted={false}  path="/" exact />
-				<PublicRoute component={Login} restricted={true} path="/login" exact />
-				<PrivateRoute component={Dashboard} path="/dashboard" exact />
-				<PrivateRoute component={Dashboard} path="/event" exact />
+				<PublicRoute component={Login} restricted={true} path="/Login" exact />
+				<PublicRoute component={SignUp} restricted={true} path="/SignUp" exact />
+				<PrivateRoute component={Dashboard} path="/Dashboard" exact />
+				<PrivateRoute component={Dashboard} path="/Event" exact />
 				<Route path="" component={NotFound} />
 			</Switch>
 		</BrowserRouter>

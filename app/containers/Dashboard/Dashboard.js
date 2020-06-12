@@ -2,9 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { store } from 'react-notifications-component';
+import { clearToken } from '../../utils/localstorage';
 import './style.scss';
 
 export default class Dashboard extends React.PureComponent {
+	constructor(props) {
+		super(props);
+
+		this.logOut = this.logOut.bind(this);
+	}
+
 	componentDidMount() {
 		const commonNotific = {
 			title: "Success !",
@@ -32,6 +39,10 @@ export default class Dashboard extends React.PureComponent {
 		if (username && username.trim().length > 0) {
 			onSubmitForm();
 		}
+	}
+
+	logOut() {
+		clearToken();
 	}
 
 	render() {
@@ -86,7 +97,7 @@ export default class Dashboard extends React.PureComponent {
 												</div>
 											</div>
 											<div className="acceptable-app text-center">
-												<span className="code-wrap">By using this app I agree to the <a className="navuse" href="#">Acceptable Use</a></span>
+												<span className="code-wrap">By using this app I agree to the <a className="navuse" onClick={this.logOut}> Logout </a></span>
 											</div>
 										</div>
 									</div>
@@ -98,7 +109,7 @@ export default class Dashboard extends React.PureComponent {
 				<div className="row">
 					<div className="col-12">
 						<div className="privacy text-center">
-							<a className="navuse" href="#">Privacy Policy</a> | <a className="navuse" href="">Privacy Settings</a>
+							<a className="navuse" href="#">Privacy Policy</a> | <a className="navuse" >afafasdfasd </a>
 						</div>
 					</div>
 				</div>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import SimpleReactValidator from 'simple-react-validator';
@@ -8,15 +7,14 @@ import showNotification from '../../utils/notification';
 import { setToken } from '../../utils/localstorage';
 import './style.scss';
 
-export default class Login extends React.PureComponent {
+export default class SignUp extends React.PureComponent {
 
 	constructor(props) {
 		super(props);
 		this.state = {
+			name: '',
 			email: '',
-			password: '',
-			isRedirect: false,
-			loginMsg: false
+			password: ''
 		}
 
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -25,10 +23,6 @@ export default class Login extends React.PureComponent {
 	}
 
     componentDidUpdate() {
-		const {
-			isLoading, response, error
-		} = this.props;
-
 		/* const {
 			isLoading, response, error
 		} = this.props;
@@ -46,14 +40,12 @@ export default class Login extends React.PureComponent {
 				showNotification('danger', response.msg);
 			}
 		} */
-
-		
 	}
 
 	handleSubmitForm(e) {
 		e.preventDefault();
 		if (this.validator.allValid()) {
-			this.props.onSubmitLogin({ email: this.state.email, password: this.state.password });
+			this.props.onSubmitSignUp({ name: this.state.name, email: this.state.email, password: this.state.password });
 		} else {
 			this.validator.showMessages()
 			this.forceUpdate()
@@ -63,15 +55,19 @@ export default class Login extends React.PureComponent {
 	handleInputChange(e) {
 		const target = e.target;
 
+		if (target.name === 'name') {
+			this.setState({
+				name: target.value
+			});
+		}
+
 		if (target.name === 'email') {
-			console.log('Email changing !');
 			this.setState({
 				email: target.value
 			});
 		}
 
 		if (target.name === 'password') {
-			console.log('password changing !', target.password);
 			this.setState({
 				password: target.value
 			});
@@ -79,23 +75,16 @@ export default class Login extends React.PureComponent {
 	}
 
 	render() { 
+		let signUpMsg = false;
 		const {
 			isLoading, response, error
 		} = this.props;
 
 		if (response) {
-			if (response.status == "SUCCESS") {
-				console.log('DEBUGG :', 'Calling redirect 1 !');
-				this.setState({ isRedirect: true });
-			} else {
-				this.setState({ loginMsg: response.msg });			
+			if (response.status == "FAILED") {
+				signUpMsg = response.msg;
 			}
 		}
-
-		if (this.state.isRedirect) {	
-			console.log('Render :', 'Calling redirectt 2 !');
-			return <Redirect exact to="/Dashboard" />
-		}	
 
 		return (
 			<div className="container">
@@ -126,11 +115,11 @@ export default class Login extends React.PureComponent {
 								<div className="content-box-wrap">
 									<div className="content-header">
 										<div className="header-main">
-											<p className="content-header-wrap">Login</p>
+											<p className="content-header-wrap">Sign Up</p>
 										</div>
-										{this.state.loginMsg && 
+										{signUpMsg && 
 											<div className="alert alert-danger alert-dismissible fade show" role="alert">
-												<strong>Woops!</strong> {this.state.loginMsg}
+												<strong>Woops!</strong> {signUpMsg}
 												<button type="button" className="close" data-dismiss="alert" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
@@ -141,6 +130,19 @@ export default class Login extends React.PureComponent {
 										<div className="content-form-wrap">
 											<div id="myForm">
 												<div className="input-wrap">
+													<div className="floating-label mt-5">
+														<input
+															id="name"
+															name="name"
+															type="text"
+															className="form-bind wrap"
+															placeholder="Name"
+															value={this.state.name}
+															onChange={this.handleInputChange}
+															onBlur={() => this.validator.showMessageFor('name')}
+														/>
+														{this.validator.message('name', this.state.name, 'required|min:3|max:100')}
+													</div>
 													<div className="floating-label mt-5">
 														<input
 															id="email"
@@ -169,24 +171,11 @@ export default class Login extends React.PureComponent {
 													</div>
 												</div>
 												<div className="button-submit text-center">
-													<div className="form-opportunity">
-														<div className="row">
-															<div className="col-12 col-md-6 pull-left">
-																<div className="remember">
-																	<input type="checkbox" name="remember" className="form-check-input" />
-																	<label htmlFor="remember">Remember me</label>
-																</div>
-															</div>
-															<div className="col-12 col-md-6 pull-right">
-																<span className="remeber-wrap">Forgot password?</span>
-															</div>
-														</div>
-													</div>
 													<div className="row d-flex align-items-center">
 														<div className="text-center col-md-12 mt-3 mb-2">
 															<button type="button" onClick={this.handleSubmitForm} className="btn btn-site-default btn-block btn-rounded mt-5">
 															{
-																isLoading ? <div><span className="spinner-border spinner-border-sm" ></span> Signin ...</div> : 'Signin'
+																isLoading ? <div><span className="spinner-border spinner-border-sm" ></span> Sign Up ...</div> : 'Sign Up'
 															}																
 															</button>
 														</div>
@@ -205,9 +194,9 @@ export default class Login extends React.PureComponent {
 	}
 }
 
-Login.propTypes = {
+SignUp.propTypes = {
 	isLoading: PropTypes.bool,
 	response: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 	error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-	onSubmitLogin: PropTypes.func
+	onSubmitSignUp: PropTypes.func
 };
