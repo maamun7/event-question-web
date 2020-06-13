@@ -1,12 +1,10 @@
 import {
 	call, put, select, takeLatest, takeEvery
 } from 'redux-saga/effects';
-
 import { postRequest } from 'utils/request';
-
 import { API_HOST } from '../App/constants';
 import { LOGIN_SUBMIT, PROCESS_SUBMIT, LOGIN_URL } from './constants';
-import { apiResponse, apiError, updateToken  } from '../App/actions';
+import { apiResponse, apiError, updateToken, stopLoader  } from '../App/actions';
 import { loginSuccess, loginError } from './actions';
 import { makeSelectLoginData } from './selectors';
 import { storeToken } from '../../utils/localstorage'
@@ -18,9 +16,12 @@ export function* postLogin() {
 
 	try {
 		const response = yield call(postRequest, url, payload);
+
+		yield put(stopLoader());
 		// Store to local storage
 		if (response.status == "SUCCESS") {
-			const { data } = response
+			let { data } = response
+			data.authToken = true
 			storeToken(data);
 			yield put(updateToken(data));
 		}

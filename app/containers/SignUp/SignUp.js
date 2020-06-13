@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import SimpleReactValidator from 'simple-react-validator';
-import Logo from '../../components/Header/images/logo.png';
 import showNotification from '../../utils/notification';
 import { setToken } from '../../utils/localstorage';
 import './style.scss';

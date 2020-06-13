@@ -1,8 +1,9 @@
 import { UPDATE_TOKEN, API_RESPONSE, API_ERROR, START_LOADER, STOP_LOADER } from './constants';
-import { getToken, clearToken } from '../../utils/localstorage'
+import { hasToken, clearToken, getToken } from '../../utils/localstorage'
 
 export const initialState = {
-	authToken: getToken(),
+	authToken: hasToken(),
+	tokenData: getToken(),
 	isLoading: false,
 	apiResponse: false,
 	apiError: false,
@@ -10,8 +11,10 @@ export const initialState = {
 
 function appReducer(state = initialState, action) {
 	switch (action.type) {
-		case UPDATE_TOKEN: {
-			return { ...state, authToken: action.token };
+
+		case UPDATE_TOKEN: {			
+			const tokenData = action.token;
+			return { ...state, authToken: tokenData.authToken, tokenData: tokenData };
 		}
 
 		case API_RESPONSE: {

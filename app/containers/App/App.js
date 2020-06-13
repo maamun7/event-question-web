@@ -7,7 +7,7 @@ import Home from 'containers/Home/Loadable';
 import Login from 'containers/Login/Loadable';
 import Dashboard from 'containers/Dashboard/Loadable';
 import SignUp from 'containers/SignUp/Loadable';
-import Header from 'components/Header';
+import Header from 'containers/Header';
 import Footer from 'components/Footer';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import NotFound from '../NotFound/Loadable';

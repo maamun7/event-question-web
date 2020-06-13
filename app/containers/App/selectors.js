@@ -5,9 +5,14 @@ const selectGlobal = (state) => state.global || initialState;
 
 const selectRoute = (state) => state.router;
 
-const getSelectToken = () => createSelector(
+const getSelectHasToken = () => createSelector(
 	selectGlobal,
 	(globalState) => globalState.authToken
+);
+
+const getSelectToken = () => createSelector(
+	selectGlobal,
+	(globalState) => globalState.tokenData
 );
 
 const getSelectIsLoading = () => createSelector(
@@ -32,6 +37,7 @@ const getSelectLocation = () => createSelector(
 
 export {
 	selectGlobal,
+	getSelectHasToken,
 	getSelectToken,
 	getSelectIsLoading,
 	getSelectApiResponse,

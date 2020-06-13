@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import SimpleReactValidator from 'simple-react-validator';
-import Logo from '../../components/Header/images/logo.png';
 import showNotification from '../../utils/notification';
 import { setToken } from '../../utils/localstorage';
 import './style.scss';
@@ -28,26 +27,6 @@ export default class Login extends React.PureComponent {
 		const {
 			isLoading, response, error
 		} = this.props;
-
-		/* const {
-			isLoading, response, error
-		} = this.props;
-
-		if (error) {
-			showNotification('danger', error);
-		}
-		console.log('RESPONSE :', response);
-
-		if (response) {
-			if (response.status == "SUCCESS") {
-				showNotification('success', response.msg);
-				setToken(response.data.token);
-			} else {
-				showNotification('danger', response.msg);
-			}
-		} */
-
-		
 	}
 
 	handleSubmitForm(e) {

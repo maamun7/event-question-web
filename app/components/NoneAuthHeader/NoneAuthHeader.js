@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Logo from './images/logo.png';
 import './style.scss';
 
-const Header = () => {
+const NoneAuthHeader = () => {	
 	return (
 		<div className="container-fluid">
 			<section className="header">
@@ -48,4 +48,4 @@ const Header = () => {
 	);
 }
 
-export default Header;
+export default NoneAuthHeader;
