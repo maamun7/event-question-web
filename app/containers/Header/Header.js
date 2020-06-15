@@ -36,11 +36,11 @@ export default class Header extends React.PureComponent {
 					</li>
 					<li className="nav-item wrap">
 						<div className="dropdown">
-							<a className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> { tokenData.name }
-							<span className="caret"></span>
+							<a style={{ color: '#32CD32'}} className="dropdown-toggle nav-link wrapnav" data-toggle="dropdown"> {tokenData.name}
+								<span className="caret"></span>
 							</a>
 							<ul className="dropdown-menu">
-								<li><span onClick={ this.handleLogout }> Logout </span> </li>
+								<li><a onClick={ this.handleLogout }> Logout </a> </li>
 							</ul>
 						</div>
 					</li>

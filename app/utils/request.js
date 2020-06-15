@@ -1,4 +1,5 @@
 import 'whatwg-fetch';
+import axios from 'axios';
 
 /**
  * Parses the JSON returned by a network request
@@ -8,10 +9,10 @@ import 'whatwg-fetch';
  * @return {object}          The parsed JSON from the request
  */
 function parseJSON(response) {
-  if (response.status === 204 || response.status === 205) {
-    return null;
-  }
-  return response.json();
+	if (response.status === 204 || response.status === 205) {
+		return null;
+	}
+	return response.json();
 }
 
 /**
@@ -22,13 +23,13 @@ function parseJSON(response) {
  * @return {object|undefined} Returns either the response, or throws an error
  */
 function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  }
+	if (response.status >= 200 && response.status < 300) {
+		return response;
+	}
 
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
+	const error = new Error(response.statusText);
+	error.response = response;
+	throw error;
 }
 
 /**
@@ -40,11 +41,11 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
-  return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON);
+	return fetch(url, options)
+		.then(checkStatus)
+		.then(parseJSON);
 }
-
+/* 
 export function postRequest(url, data) {
 	return fetch(url, { 
 			method: 'POST',
@@ -58,4 +59,35 @@ export function postRequest(url, data) {
 		})
 		.then(checkStatus)
 		.then(parseJSON);
+} */
+
+export async function postRequest(url, data) {
+	return await axios({
+		method: 'post',
+		url: url,
+		data: data,
+		responseType: 'json'
+	})
+		.then(res => {
+			if (res.status === 204 || res.status === 205) {
+				return null;
+			}
+
+			return res.data;
+		})
+		.catch(handleError);
+}
+
+function handleError(error) {
+	if (error.response) {
+		console.log(error.response.data);
+		console.log(error.response.status);
+		console.log(error.response.headers);
+	} else if (error.request) {
+		console.log(error.request);
+	} else {
+		console.log('Error', error.message);
+	}
+
+	console.log(error.toJSON());
 }

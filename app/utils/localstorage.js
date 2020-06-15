@@ -17,11 +17,42 @@ export const hasToken = () => {
     return false;
 }
 
-export const getToken = () => {
+export const getTokenData = () => {
 	const token = localStorage.getItem(TOKEN_KEY);
     if (token) {
         return JSON.parse(token);
     }
 
     return {};
+}
+
+export const getToken = _ => {
+	
+	const { token } = getTokenData();
+
+	if (token) {
+		return token;
+	}
+
+    return false;
+}
+
+export const getBearerToken = _ => {
+	const { tokenWithBearer } = getTokenData();
+
+	if (tokenWithBearer) {
+		return tokenWithBearer;
+	}
+
+    return false;
+}
+
+export const getRefreshToken = _ => {
+	const { refreshToken } = getTokenData();
+
+	if (refreshToken) {
+		return refreshToken;
+	}
+
+    return false;
 }

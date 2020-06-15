@@ -39,6 +39,8 @@ import 'styles/theme.scss';
 
 import configureStore from './configureStore';
 
+import requestInterceptor from './utils/interceptor';
+
 // Import all initialization stuff
 import { registerOpenSans } from './init';
 
@@ -47,6 +49,9 @@ registerOpenSans();
 // Create redux store with history
 const initialState = {};
 const store = configureStore(initialState, history);
+
+requestInterceptor(store);
+
 const MOUNT_NODE = document.getElementById('app');
 
 const render = () => {

@@ -1,9 +1,9 @@
 import { UPDATE_TOKEN, API_RESPONSE, API_ERROR, START_LOADER, STOP_LOADER } from './constants';
-import { hasToken, clearToken, getToken } from '../../utils/localstorage'
+import { hasToken, clearToken, getTokenData } from '../../utils/localstorage'
 
 export const initialState = {
 	authToken: hasToken(),
-	tokenData: getToken(),
+	tokenData: getTokenData(),
 	isLoading: false,
 	apiResponse: false,
 	apiError: false,

@@ -17,6 +17,8 @@ export function* postLogin() {
 	try {
 		const response = yield call(postRequest, url, payload);
 
+		console.log('DEBUGG :', response);
+
 		yield put(stopLoader());
 		// Store to local storage
 		if (response.status == "SUCCESS") {

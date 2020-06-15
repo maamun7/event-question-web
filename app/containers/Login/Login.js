@@ -12,8 +12,8 @@ export default class Login extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
-			email: '',
-			password: '',
+			email: 'aaa@bsbsc.com',
+			password: 123456,
 			isRedirect: false,
 			loginMsg: false
 		}

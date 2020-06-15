@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { store } from 'react-notifications-component';
 import { clearToken } from '../../utils/localstorage';
 import './style.scss';
 
@@ -13,32 +12,7 @@ export default class Dashboard extends React.PureComponent {
 	}
 
 	componentDidMount() {
-		const commonNotific = {
-			title: "Success !",
-			message: "Configurable",
-			type: "success",
-			insert: "bottom",
-			container: "top-right",
-			animationIn: ["animated", "fadeIn"],
-			animationOut: ["animated", "fadeOut"],
-			dismiss: {
-				duration: 5000,
-				//onScreen: true, // Show progress bar
-				pauseOnHover: true,
-				showIcon: true,
-				click: true
-			  }
-		  }
-
-		  store.addNotification({
-			  ...commonNotific,
-			  message: 'Successfully added the item'
-		  });
-
-		const { username, onSubmitForm } = this.props;
-		if (username && username.trim().length > 0) {
-			onSubmitForm();
-		}
+		
 	}
 
 	logOut() {
@@ -93,11 +67,11 @@ export default class Dashboard extends React.PureComponent {
 										<div className="content-form-wrap">											
 											<div className="row">
 												<div className="col-md-4 code-input-field">												
-													<h1> Dashboard </h1>
+													
 												</div>
 											</div>
 											<div className="acceptable-app text-center">
-												<span className="code-wrap">By using this app I agree to the <a className="navuse" onClick={this.logOut}> Logout </a></span>
+												
 											</div>
 										</div>
 									</div>
