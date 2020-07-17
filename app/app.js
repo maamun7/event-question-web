@@ -7,6 +7,7 @@
 
 // Needed for redux-saga es6 generator support
 import '@babel/polyfill';
+import axios from 'axios';
 
 // Import all the third party stuff
 import React from 'react';
@@ -39,7 +40,7 @@ import 'styles/theme.scss';
 
 import configureStore from './configureStore';
 
-import requestInterceptor from './utils/interceptor';
+import setupAxiosInterceptors from './utils/interceptor';
 
 // Import all initialization stuff
 import { registerOpenSans } from './init';
@@ -50,7 +51,7 @@ registerOpenSans();
 const initialState = {};
 const store = configureStore(initialState, history);
 
-requestInterceptor(store);
+setupAxiosInterceptors(store);
 
 const MOUNT_NODE = document.getElementById('app');
 

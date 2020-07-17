@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 import axios from 'axios';
-
+//axios.defaults.baseURL = 'http://api.qine.test/v1';
 /**
  * Parses the JSON returned by a network request
  *
@@ -12,6 +12,7 @@ function parseJSON(response) {
 	if (response.status === 204 || response.status === 205) {
 		return null;
 	}
+
 	return response.json();
 }
 
@@ -45,21 +46,6 @@ export default function request(url, options) {
 		.then(checkStatus)
 		.then(parseJSON);
 }
-/* 
-export function postRequest(url, data) {
-	return fetch(url, { 
-			method: 'POST',
-			mode: 'cors',
-			cache: 'no-cache',
-			credentials: 'same-origin',
-			headers: {
-				'Content-Type': 'application/json; charset=utf-8'
-			},
-			body: JSON.stringify(data)
-		})
-		.then(checkStatus)
-		.then(parseJSON);
-} */
 
 export async function postRequest(url, data) {
 	return await axios({
@@ -90,4 +76,18 @@ function handleError(error) {
 	}
 
 	console.log(error.toJSON());
+}
+
+export function getRequest(url) {
+	
+	return axios.get(url)
+	.then(res => {
+
+		if (res.status === 204 || res.status === 205) {
+			return null;
+		}
+
+		return res.data;
+	})
+	.catch(handleError);
 }

@@ -2,7 +2,7 @@ import {
 	call, put, select, takeLatest, takeEvery
 } from 'redux-saga/effects';
 import { postRequest } from 'utils/request';
-import { API_HOST } from '../App/constants';
+import { BASE_URL } from '../App/constants';
 import { LOGIN_SUBMIT, PROCESS_SUBMIT, LOGIN_URL } from './constants';
 import { apiResponse, apiError, updateToken, stopLoader  } from '../App/actions';
 import { loginSuccess, loginError } from './actions';
@@ -12,7 +12,7 @@ import { storeToken } from '../../utils/localstorage'
 export function* postLogin() {
 	console.log('calling post login');
 	const payload = yield select(makeSelectLoginData());
-	const url = `${API_HOST}${LOGIN_URL}`;
+	const url = `${BASE_URL}${LOGIN_URL}`;
 
 	try {
 		const response = yield call(postRequest, url, payload);

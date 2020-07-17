@@ -3,7 +3,7 @@ import {
 } from 'redux-saga/effects';
 
 import { postRequest } from 'utils/request';
-import { API_HOST } from '../App/constants';
+import { BASE_URL } from '../App/constants';
 import { SIGNUP_SUBMIT, PROCESS_SUBMIT, SIGNUP_URL } from './constants';
 import { apiResponse, apiError, updateToken, stopLoader  } from '../App/actions';
 import { signUpSuccess, signUpError } from './actions';
@@ -12,7 +12,7 @@ import { storeToken } from '../../utils/localstorage'
 
 export function* postSignUp() {
 	const payload = yield select(makeSelectSignUpData());
-	const url = `${API_HOST}${SIGNUP_URL}`;
+	const url = `${BASE_URL}${SIGNUP_URL}`;
 	console.log('payload :', payload);
 
 	try {

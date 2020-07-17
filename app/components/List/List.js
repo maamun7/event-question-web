@@ -4,11 +4,11 @@ import './style.scss';
 
 const List = ({ component, items }) => {
   const ComponentToRender = component;
-  let content = (<div></div>);
+  let content = (<td></td>);
 
   // If we have items, render them
   if (items) {
-    content = items.map((item) => (
+    content = items.map(item => (
       <ComponentToRender key={`item-${item.id}`} item={item} />
     ));
   } else {
@@ -17,11 +17,20 @@ const List = ({ component, items }) => {
   }
 
   return (
-    <div className="list-wrapper">
-      <ul>
-        {content}
-      </ul>
-    </div>
+	<div className="table-responsive">          
+		<table className="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Code</th>
+				</tr>
+			</thead>
+			<tbody>
+				{content}
+			</tbody>
+		</table>
+	</div>
   );
 };
 

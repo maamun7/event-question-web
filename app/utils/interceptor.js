@@ -1,58 +1,46 @@
 import axios from 'axios';
 import { storeToken, clearToken, getToken, getBearerToken, getRefreshToken } from './localstorage';
 import { updateToken } from '../containers/App/actions';
+import { BASE_URL } from '../containers/App/constants';
 
-export default function requestInterceptor(store) {
+const TIMEOUT = 1 * 60 * 1000;
+axios.defaults.timeout = TIMEOUT;
+axios.defaults.baseURL = BASE_URL;
 
-	axios.interceptors.request.use(config => {
+const setupAxiosInterceptors = store => {
+	const onRequestSuccess = req => {
+		const token = getToken();
 
-		const token = getBearerToken();
+		console.log('token :', token);
 
 		if (token) {
-			config.headers['Authorization'] = token;
+			req.headers['Authorization'] = `Bearer ${token}`;
 		}
 
-		config.headers['Content-Type'] = 'application/json; charset=utf-8';
+		req.headers['Content-Type'] = 'application/json; charset=utf-8';
 
-		return config;
+		return req;
+	}
 
-	}, error => {
+	const onResponseSuccess = response => response;
+	const onResponseError = err => {
 
-		console.log('interceptor error :', error);
+		console.log('Interceptor Error:', err);
 
-		if (error.response.data.token.KEY == 'ERR_EXPIRED_TOKEN') {
-			clearToken();
-			store.dispatch(updateToken({ authToken: false}));
+		const status = err.status || (err.response ? err.response.status : 0);
+
+		if (status === 403 || status === 401) {
+			console.log('Remove token please !');
+		//	clearToken();
+		//	store.dispatch(updateToken({ authToken: false }));
 		}
 
-		return Promise.reject(error);
-	});
-}
+		return Promise.reject(err);
+	};
 
-// Response interceptor
-axios.interceptors.response.use(response => {
-		// Do something with response data
-		return response;
-	}, error => {
-		// Request for refresh token
-		const originalRequest = error.config;
-		if (error.response.status === 401 && !originalRequest._retry) {
+	axios.interceptors.request.use(onRequestSuccess);
+	axios.interceptors.response.use(onResponseSuccess, onResponseError);
 
-			originalRequest._retry = true;
-			const refreshToken = getRefreshToken();
+};
 
-			return axios.post('/auth/token', {
-					"refresh_token": refreshToken
-				})
-				.then(res => {
-					if (res.status === 201) {
-						storeToken(res.data);
-						axios.defaults.headers.common['Authorization'] = getBearerToken();
-						return axios(originalRequest);
-					}
-				})
-		}
-
-		return Promise.reject(error);
-	});
-
+export default setupAxiosInterceptors;

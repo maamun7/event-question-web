@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink, Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import HeaderContent from '../../components/HeaderContent';
 
@@ -20,25 +21,25 @@ export default class Header extends React.PureComponent {
 			<div className="collapse navbar-collapse ml-5" id="navbarSupportedContent">
 				<ul className="navbar-nav wrap mr-auto">
 					<li className="nav-item wrap">
-						<a className="nav-link wrapnav" href="/Dashboard">Dashboard</a>
+						<NavLink exact className="nav-link wrapnav" activeStyle={{ color: '#32CD32'}} to="/Dashboard">Dashboard</NavLink>
 					</li>
 					<li className="nav-item wrap">
-						<a className="nav-link wrapnav" href="#">Solutions</a>
+						<NavLink exact className="nav-link wrapnav" activeStyle={{ color: '#32CD32'}}  to="/Event">Event</NavLink>
 					</li>
 					<li className="nav-item wrap">
-						<a className="nav-link wrapnav" href="#">Pricing</a>
+						<NavLink exact className="nav-link wrapnav" to="#">Pricing</NavLink>
 					</li>
 					<li className="nav-item wrap">
-						<a className="nav-link wrapnav" href="#">Resources</a>
+						<NavLink exact className="nav-link wrapnav" to="#">Resources</NavLink>
 					</li>
 					<li className="nav-item wrap">
-						<a className="nav-link wrapnav" href="#">Enterprise</a>
+						<NavLink exact className="nav-link wrapnav" to="#">Enterprise</NavLink>
 					</li>
 					<li className="nav-item wrap">
 						<div className="dropdown">
-							<a style={{ color: '#32CD32'}} className="dropdown-toggle nav-link wrapnav" data-toggle="dropdown"> {tokenData.name}
+							<Link style={{ color: '#32CD32'}} className="dropdown-toggle nav-link wrapnav" data-toggle="dropdown"> {tokenData.name}
 								<span className="caret"></span>
-							</a>
+							</Link>
 							<ul className="dropdown-menu">
 								<li><a onClick={ this.handleLogout }> Logout </a> </li>
 							</ul>
@@ -52,27 +53,27 @@ export default class Header extends React.PureComponent {
 			<div className="collapse navbar-collapse ml-5" id="navbarSupportedContent">
 				<ul className="navbar-nav wrap mr-auto">
 					<li className="nav-item wrap">
-						<a className="nav-link wrapnav" href="/">Home</a>
+						<NavLink exact className="nav-link wrapnav" to="/">Home</NavLink>
 					</li>
 					<li className="nav-item wrap">
-						<a className="nav-link wrapnav" href="#">Solutions</a>
+						<NavLink exact className="nav-link wrapnav" to="#">Solutions</NavLink>
 					</li>
 					<li className="nav-item wrap">
-						<a className="nav-link wrapnav" href="#">Pricing</a>
+						<NavLink exact className="nav-link wrapnav" to="#">Pricing</NavLink>
 					</li>
 					<li className="nav-item wrap">
-						<a className="nav-link wrapnav" href="#">Resources</a>
+						<NavLink exact className="nav-link wrapnav" to="#">Resources</NavLink>
 					</li>
 					<li className="nav-item wrap">
-						<a className="nav-link wrapnav" href="#">Enterprise</a>
+						<NavLink exact className="nav-link wrapnav" to="#">Enterprise</NavLink>
 					</li>
 					<li className="nav-item login-wrap">
-						<a className="nav-link wrapnav" href="/login">Log In</a>
+						<NavLink exact className="nav-link wrapnav" to="/login">Log In</NavLink>
 					</li>
 					<li className="nav-item ml-3">
-						<a className="nav-link wrapnav -blue" href="/SignUp">
+						<NavLink exact className="nav-link wrapnav -blue" to="/SignUp">
 							<span className="button button--small button--orange">Sign Up</span>
-						</a>
+						</NavLink>
 					</li>
 				</ul>
 			</div>

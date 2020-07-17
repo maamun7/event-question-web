@@ -6,6 +6,7 @@ import PublicRoute from 'components/PublicRoute';
 import Home from 'containers/Home/Loadable';
 import Login from 'containers/Login/Loadable';
 import Dashboard from 'containers/Dashboard/Loadable';
+import Event from 'containers/Event/Loadable';
 import SignUp from 'containers/SignUp/Loadable';
 import Header from 'containers/Header';
 import Footer from 'components/Footer';
@@ -23,19 +24,19 @@ const App = () => (
 			<meta name="description" content="React application" />
 		</Helmet>
 		<LoadingIndicator />
-		<Header />
-		<ReactNotification />
 		<BrowserRouter>
-			<Switch>				
+			<Header />
+			<ReactNotification />
+			<Switch>			
 				<PublicRoute component={Home} restricted={false}  path="/" exact />
 				<PublicRoute component={Login} restricted={true} path="/Login" exact />
 				<PublicRoute component={SignUp} restricted={true} path="/SignUp" exact />
 				<PrivateRoute component={Dashboard} path="/Dashboard" exact />
-				<PrivateRoute component={Dashboard} path="/Event" exact />
+				<PrivateRoute component={Event} path="/Event" exact />
 				<Route path="" component={NotFound} />
 			</Switch>
+			<Footer />
 		</BrowserRouter>
-		<Footer />
 	</div>
 );
 
