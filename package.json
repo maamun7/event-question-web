@@ -1,0 +1,68 @@
+{
+  "name": "react-boilerplate-with-hook",
+  "version": "1.0.0",
+  "description": "Nothing here to describe !",
+  "scripts": {
+    "start": "webpack",
+    "dev": "webpack-dev-server --config webpack/development.js --watch --inline --progress --profile",
+    "build": "webpack --config webpack/production.js",
+    "test": "test",
+    "format": "prettier \"src/**/* .{js,html}\" --write",
+    "lint": "prettier \"src/**/* .{js,jsx}\" --quiet"
+  },
+  "repository": "git+https://github.com/maamun7/event-question-web.git",
+  "keywords": [
+    "react",
+    "hook",
+    "boilerplate"
+  ],
+  "author": "Mamun Ahmed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maamun7/event-question-web/issues"
+  },
+  "homepage": "https://github.com/maamun7/event-question-web#readme",
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
+    "@webpack-cli/serve": "^1.1.0",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.3.2",
+    "css-loader": "^5.0.1",
+    "css-minimizer-webpack-plugin": "^1.1.5",
+    "eslint": "7.2.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.2.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "4.0.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^6.2.0",
+    "html-loader": "^1.3.2",
+    "html-webpack-plugin": "^4.5.0",
+    "image-webpack-loader": "^7.0.1",
+    "img-optimize-loader": "^1.0.7",
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.20",
+    "mini-css-extract-plugin": "^1.3.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "postcss-loader": "^4.1.0",
+    "prettier": "^2.2.1",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.8.0",
+    "webpack-bundle-analyzer": "^4.2.0",
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.4.0"
+  }
+}
