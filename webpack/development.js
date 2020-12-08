@@ -1,16 +1,11 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+// const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const common = require('./common');
 
 module.exports = merge(common, {
     mode: 'development',
     devtool: 'source-map',
-    output: {
-        path: path.resolve(__dirname, '../dist'),
-        filename: 'assets/js/[name].[chunkhash].js',
-        publicPath: '/',
-    },
     module: {
         rules: [
             {
@@ -24,7 +19,7 @@ module.exports = merge(common, {
     },
     devServer: {
         inline: true,
-        contentBase: '../dist',
+        contentBase: './dist',
         host: '127.0.0.1',
         port: 1234,
         open: true,

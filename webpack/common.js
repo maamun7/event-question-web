@@ -21,10 +21,7 @@ module.exports = {
 
     optimization: {
         minimize: true,
-        minimizer: [new CssMinimizerPlugin(), '...'],
-        runtimeChunk: {
-            name: 'runtime',
-        },
+        minimizer: [new CssMinimizerPlugin()],
     },
 
     module: {

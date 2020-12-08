@@ -1,18 +1,12 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const common = require('./common.js');
 
 module.exports = merge(common, {
     mode: 'production',
     devtool: false,
-    output: {
-        path: path.resolve(__dirname, '../dist'),
-        filename: 'assets/js/[name].[chunkhash].js',
-        publicPath: '/',
-    },
     module: {
         rules: [
             {
